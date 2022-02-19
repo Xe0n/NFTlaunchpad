@@ -130,36 +130,20 @@ render() {
 				</Row>
 				<Row>
 					<Col>
-          <form onSubmit={this.handleSubmit} style={{ marginTop: "10px" }}>
-            <label>
-              <input
-                style={{ display: "block", marginTop: "15px" }}
-                label="Name"
-                type="text"
-                value={this.state.name}
-                onChange={this.handleChangeName}
-              />
-            </label>
-            <label>
-              <input
-                style={{ display: "block", marginTop: "15px" }}
-                label="Email"
-                type="text"
-                value={this.state.email}
-                onChange={this.handleChangeEmail}
-              />
-            </label>
-            <label>
-              <input
-                style={{ display: "block", marginTop: "15px" }}
-                label="Type User"
-                type="text"
-                value={this.state.typeUser}
-                onChange={this.handleChangeTypeUser}
-              />
-            </label>
-            <input style={{ display: "block", marginTop: "15px" }} type="submit" value="Отправить" />
-          </form>
+             <Form className="text-start" onSubmit={this.handleSubmit} >
+							<Form.Group className="mb-3" controlId="formBasicEmail">
+								<Form.Label>Ваш Email</Form.Label>
+								<Form.Control type="email" label="Email" placeholder="Email" value={this.state.email} onChange={this.handleChangeEmail} />
+							</Form.Group>
+
+							<Form.Group className="mb-3" controlId="formBasicPassword">
+								<Form.Label>Ваш псевдоним</Form.Label>
+								<Form.Control type="text" label="Name" placeholder="Псевдоним" value={this.state.name} onChange={this.handleChangeName} />
+							</Form.Group>
+							<Button variant="primary" type="submit">
+								Отправить
+							</Button>
+						</Form>
 					</Col>
 
 				</Row>
