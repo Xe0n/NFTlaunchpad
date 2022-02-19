@@ -49,24 +49,24 @@ export default class AddNFT extends React.Component {
         },
       ],
     };
-    this.handleChangeCollection = this.handleChangeCollection.bind(this);
+    this.handleChangeFirstAddress = this.handleChangeFirstAddress.bind(this);
    this.handleChangeDeadline = this.handleChangeDeadline.bind(this);
    this.handleChangeName = this.handleChangeName.bind(this);
    this.handleSubmit = this.handleSubmit.bind(this);
    this.handleChangeDescription = this.handleChangeDescription.bind(this);
    this.handleChangeReward = this.handleChangeReward.bind(this);
-   this.handleChangeTypeUser = this.handleChangeTypeUser.bind(this);
+   this.handleChangeSecondAddress = this.handleChangeSecondAddress.bind(this);
    this.handleChangeEmail = this.handleChangeEmail.bind(this);
   }
 
-  handleChangeCollection = event => {
+  handleChangeFirstAddress = event => {
  console.log(event.target.value);
- this.setState({ collection: event.target.value });
+ this.setState({ firstAddress: event.target.value });
 };
 
-handleChangeTypeUser = event => {
+handleChangeSecondAddress = event => {
  console.log(event.target.value);
- this.setState({ typeUser: event.target.value });
+ this.setState({ secondAddress: event.target.value });
 };
 
 handleChangeEmail = event => {
@@ -105,19 +105,17 @@ handleSubmit = event => {
    this.state.reward,
    this.state.description,
  );
- bodyFormData.append("name", this.state.name);
- bodyFormData.append("email", this.state.email);
- bodyFormData.append("typeUser", this.state.typeUser);
- bodyFormData.append("address", this.props.address);
+ bodyFormData.append("firstAddress", this.state.firstAddress);
+ bodyFormData.append("secondAddress", this.state.secondAddress);
  axios({
    method: "post",
-   url: "http://localhost:4100/v1/users/createUser2",
+   url: "http://localhost:4100/v1/users/createBilateralTreaty",
    data: bodyFormData,
    headers: { "Content-Type": "multipart/form-data" },
  })
    .then(function (response) {
      //handle success
-     console.log(response);
+     console.log("AAAAAA",response.data.hex);
    })
    .catch(function (response) {
      //handle error
@@ -148,12 +146,12 @@ render() {
              <Form className="text-start" onSubmit={this.handleSubmit} >
 							<Form.Group className="mb-3" controlId="formBasicEmail">
 								<Form.Label>Ваш Email</Form.Label>
-								<Form.Control type="email" label="Email" placeholder="Email" value={this.state.email} onChange={this.handleChangeEmail} />
+								<Form.Control type="text" label="firstAddress" placeholder="First Address" value={this.state.firstAddress} onChange={this.handleChangeFirstAddress} />
 							</Form.Group>
 
 							<Form.Group className="mb-3" controlId="formBasicPassword">
 								<Form.Label>Ваш псевдоним</Form.Label>
-								<Form.Control type="text" label="Name" placeholder="Псевдоним" value={this.state.name} onChange={this.handleChangeName} />
+								<Form.Control type="text" label="secondAddress" placeholder="Second Address" value={this.state.secondAddress} onChange={this.handleChangeSecondAddress} />
 							</Form.Group>
 							<Button variant="primary" type="submit">
 								Отправить

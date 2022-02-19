@@ -29,7 +29,7 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, ExampleUI, Hints, Subgraph, Reg, Creator, Broker, List, SendArt, AddNFT, CreatorPage } from "./views";
+import { Home, ExampleUI, Hints, Subgraph, Reg, Creator, Broker, List, SendArt, AddNFT, CreatorPage, CreateBilateralTreaty } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SingleItems from "./views/SingleItems";
@@ -75,10 +75,8 @@ function App(props) {
   ]);
   const mainnetProvider = useStaticJsonRPC(providers);
 
-  if (DEBUG) console.log(`Using ${selectedNetwork} network`);
 
   // 🛰 providers
-  if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
 
   const logoutOfWeb3Modal = async () => {
     await web3Modal.clearCachedProvider();
@@ -142,7 +140,6 @@ function App(props) {
 
   // If you want to call a function on a new block
   useOnBlock(mainnetProvider, () => {
-    console.log(`⛓ A new mainnet block is here: ${mainnetProvider._lastBlockNumber}`);
   });
 
   // Then read your DAI balance like:
@@ -173,17 +170,7 @@ function App(props) {
       writeContracts &&
       mainnetContracts
     ) {
-      console.log("_____________________________________ 🏗 scaffold-eth _____________________________________");
-      console.log("🌎 mainnetProvider", mainnetProvider);
-      console.log("🏠 localChainId", localChainId);
-      console.log("👩‍💼 selected address:", address);
-      console.log("🕵🏻‍♂️ selectedChainId:", selectedChainId);
-      console.log("💵 yourLocalBalance", yourLocalBalance ? ethers.utils.formatEther(yourLocalBalance) : "...");
-      console.log("💵 yourMainnetBalance", yourMainnetBalance ? ethers.utils.formatEther(yourMainnetBalance) : "...");
-      console.log("📝 readContracts", readContracts);
-      console.log("🌍 DAI contract on mainnet:", mainnetContracts);
-      console.log("💵 yourMainnetDAIBalance", myMainnetDAIBalance);
-      console.log("🔐 writeContracts", writeContracts);
+
     }
   }, [
     mainnetProvider,
@@ -203,18 +190,15 @@ function App(props) {
     setInjectedProvider(new ethers.providers.Web3Provider(provider));
 
     provider.on("chainChanged", chainId => {
-      console.log(`chain changed to ${chainId}! updating providers`);
       setInjectedProvider(new ethers.providers.Web3Provider(provider));
     });
 
     provider.on("accountsChanged", () => {
-      console.log(`account changed!`);
       setInjectedProvider(new ethers.providers.Web3Provider(provider));
     });
 
     // Subscribe to session disconnection
     provider.on("disconnect", (code, reason) => {
-      console.log(code, reason);
       logoutOfWeb3Modal();
     });
     // eslint-disable-next-line
@@ -318,6 +302,11 @@ function App(props) {
         <Route path="/list">
           <List />
         </Route>
+        <Route path="/createtreaty">
+          <CreateBilateralTreaty
+              address={address}
+              />
+        </Route>
         <Route path="/sendart">
           <SendArt
              address={address}
@@ -325,6 +314,11 @@ function App(props) {
         </Route>
         <Route path="/addnft">
           <AddNFT
+             address={address}
+             />
+        </Route>
+        <Route path="/singleitems">
+          <SingleItems
              address={address}
              />
         </Route>

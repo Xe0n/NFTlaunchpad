@@ -18,7 +18,6 @@ contract YourCollectible is ERC1155 {
 
   function mint(
       address _to,
-      address _toSecond,
 		  uint256 _id,
 		  uint256 _quantity,
 		  bytes memory _data
@@ -29,7 +28,6 @@ contract YourCollectible is ERC1155 {
         require(_id == _currentTokenID, "Wrong id provided");
 
 		  _mint(_to, _id, _quantity, _data);
-      _mint(_toSecond, _id, _quantity, _data);
 		  tokenSupply[_id] = tokenSupply[_id] + _quantity;
       _incrementTokenTypeId();
   }

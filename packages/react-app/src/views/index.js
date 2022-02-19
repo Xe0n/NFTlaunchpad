@@ -8,3 +8,4 @@ export { default as Broker } from "./Broker";
 export { default as List } from "./List";
 export { default as SendArt } from "./SendArt";
 export { default as AddNFT } from "./addNFT";
+export { default as CreateBilateralTreaty } from "./SendArt0";

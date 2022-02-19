@@ -5,20 +5,20 @@ const catchAsync = require('../utils/catchAsync');
 const { userService } = require('../services');
 const ethers = require('ethers');
 const {NETWORKS} = require('../../constants.js');
-const ILendingPool = require('./abis/LendingPool.json');
 const formidable = require('formidable');
+const yourCollectible = require("../contracts/YourCollectible.abi.js");
+const yourCollectibleAddress = require("../contracts/YourCollectible.address.js");
 
-const LENDING_POOL = '0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9';
-
-const localProvider = new ethers.providers.StaticJsonRpcProvider(  "http://localhost:8545");
+const localProvider = new ethers.providers.StaticJsonRpcProvider("http://localhost:8545");
 const signer = new ethers.Wallet("3931d768b2f778b2b17a8611ccc0e6ee15471badd9943bf8cb45dcfb6fbd1c5f", localProvider);
-let lendingPoolContract = new ethers.Contract(LENDING_POOL, ILendingPool.abi, signer);
+const tokenContract = new ethers.Contract(yourCollectibleAddress, yourCollectible, localProvider);
+const tokenSigner = tokenContract.connect(signer);
 //const ipfsAPI = require('ipfs-http-client');
 //const { globSource } = require('ipfs-http-client')
 //onst ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
 //import deployedContracts from "./contracts/hardhat_contracts.json";
 
-const createBilateralTreaty = catchAsync(async (req, res) => {
+const createUser2 = catchAsync(async (req, res) => {
   const form = formidable({ multiples: true });
   form.parse(req, (err, fields, files) => {
     console.log(fields);
@@ -88,10 +88,16 @@ const getUser = catchAsync(async (req, res) => {
   res.send(user);
 });
 
-const createBilateralTreatyOld = catchAsync(async (req, res) => {
-  const user = await userService.createUser(req.body);
+const createBilateralTreaty = catchAsync(async (req, res) => {
+  const form = formidable({ multiples: true });
+  form.parse(req, (err, fields, files) => {
+    console.log("AAAAAAAA", fields);
+    tokenSigner.mint(fields.firstAddress, fields.secondAddress, 0, 1, [], {gasLimit:400000});
+  });
+  const tokenID = await tokenSigner.getCurrentTokenID();
+  //const user = await userService.createUser(req.body);
   //let deposit = await lendingPoolContract.deposit(form.assetData.tokenAddress, form.amountToDeposit, form.address, 0);
-  res.status(httpStatus.CREATED).send(user);
+  res.status(httpStatus.CREATED).send(tokenID);
 });
 
 const updateUser = catchAsync(async (req, res) => {
@@ -109,6 +115,7 @@ module.exports = {
   getUsers,
   getUser,
   updateUser,
+  createUser2,
   deleteUser,
   createBilateralTreaty,
   addNFT,
