@@ -11,110 +11,96 @@ const List = () => {
         <>
         <Container>
             <Row>
-                <Col md="2">
-                    <Card
-                        description="Click to create a dApp"
-                        title="dApp"
-                        tooltipText="Lorem Ipsum Dole met sai souni lokomit anici trenicid"
-                    >
-                        <div>
-                        <Illustration
-                            height="180px"
-                            logo="servers"
-                            width="100%"
-                        />
-                        </div>
-                    </Card>
+                <Col md="2" className="mt-1">
+                    <Link to="#CreatorPage">
+                        <Card
+                            description="@AuthorName"
+                            title="NewArt_1"
+                            isDisabled="true"
+                        >
+                            <div>
+                            <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
+                            </div>
+                        </Card>
+                    </Link>
                 </Col>
-                <Col md="2">
-                    <Card
-                        description="Click to create a dApp"
-                        title="dApp"
-                        tooltipText="Lorem Ipsum Dole met sai souni lokomit anici trenicid"
-                    >
-                        <div>
-                        <Illustration
-                            height="180px"
-                            logo="servers"
-                            width="100%"
-                        />
-                        </div>
-                    </Card>
+                <Col md="2" className="mt-1">
+                    <Link to="#CreatorPage">
+                        <Card
+                            description="@AuthorName"
+                            title="NewArt_1"
+                            isDisabled="true"
+                        >
+                            <div>
+                            <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
+                            </div>
+                        </Card>
+                    </Link>
                 </Col>
-                <Col md="2">
-                    <Card
-                        description="Click to create a dApp"
-                        title="dApp"
-                        tooltipText="Lorem Ipsum Dole met sai souni lokomit anici trenicid"
-                    >
-                        <div>
-                        <Illustration
-                            height="180px"
-                            logo="servers"
-                            width="100%"
-                        />
-                        </div>
-                    </Card>
+                <Col md="2" className="mt-1">
+                    <Link to="#CreatorPage">
+                        <Card
+                            description="@AuthorName"
+                            title="NewArt_1"
+                            isDisabled="true"
+                        >
+                            <div>
+                            <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
+                            </div>
+                        </Card>
+                    </Link>
                 </Col>
-                <Col md="2">
-                    <Card
-                        description="Click to create a dApp"
-                        title="dApp"
-                        tooltipText="Lorem Ipsum Dole met sai souni lokomit anici trenicid"
-                    >
-                        <div>
-                        <Illustration
-                            height="180px"
-                            logo="servers"
-                            width="100%"
-                        />
-                        </div>
-                    </Card>
+                <Col md="2" className="mt-1">
+                    <Link to="#CreatorPage">
+                        <Card
+                            description="@AuthorName"
+                            title="NewArt_1"
+                            isDisabled="true"
+                        >
+                            <div>
+                            <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
+                            </div>
+                        </Card>
+                    </Link>
                 </Col>
-                <Col md="2">
-                    <Card
-                        description="Click to create a dApp"
-                        title="dApp"
-                        tooltipText="Lorem Ipsum Dole met sai souni lokomit anici trenicid"
-                    >
-                        <div>
-                        <Illustration
-                            height="180px"
-                            logo="servers"
-                            width="100%"
-                        />
-                        </div>
-                    </Card>
+                <Col md="2" className="mt-1">
+                    <Link to="#CreatorPage">
+                        <Card
+                            description="@AuthorName"
+                            title="NewArt_1"
+                            isDisabled="true"
+                        >
+                            <div>
+                            <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
+                            </div>
+                        </Card>
+                    </Link>
                 </Col>
-                <Col md="2">
-                    <Card
-                        description="Click to create a dApp"
-                        title="dApp"
-                        tooltipText="Lorem Ipsum Dole met sai souni lokomit anici trenicid"
-                    >
-                        <div>
-                        <Illustration
-                            height="180px"
-                            logo="servers"
-                            width="100%"
-                        />
-                        </div>
-                    </Card>
+                <Col md="2" className="mt-1">
+                    <Link to="#CreatorPage">
+                        <Card
+                            description="@AuthorName"
+                            title="NewArt_1"
+                            isDisabled="true"
+                        >
+                            <div>
+                            <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
+                            </div>
+                        </Card>
+                    </Link>
                 </Col>
-                <Col md="2">
-                    <Card
-                        description="Click to create a dApp"
-                        title="dApp"
-                        tooltipText="Lorem Ipsum Dole met sai souni lokomit anici trenicid"
-                    >
-                        <div>
-                        <Illustration
-                            height="180px"
-                            logo="servers"
-                            width="100%"
-                        />
-                        </div>
-                    </Card>
+                <Col md="2" className="mt-3">
+                    <Link to="#CreatorPage">
+                        <Card
+                            description="@AuthorName"
+                            title="NewArt_1"
+                            isDisabled="true"
+                        >
+                            <div>
+                            <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
+                            </div>
+                        </Card>
+                    </Link>
                 </Col>
                 
             </Row>
