@@ -29,7 +29,7 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, ExampleUI, Hints, Subgraph, Reg, Creator, Broker, List, SendArt } from "./views";
+import { Home, ExampleUI, Hints, Subgraph, Reg, Creator, Broker, List, SendArt, CreatorPage } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -348,6 +348,9 @@ function App(props) {
         </Route>
         <Route path="/sendart">
           <SendArt />
+        </Route>
+        <Route path="/creatorpage">
+          <CreatorPage />
         </Route>
       </Switch>
 

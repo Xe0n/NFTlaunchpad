@@ -1,18 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useContractReader } from "eth-hooks";
-import { CryptoCards, Card, Illustration } from 'web3uikit';
-import { Row, Col, Container, Form, Button } from 'react-bootstrap';
-import axios from 'axios'
-import { ethers } from "ethers";
+import { Row, Col, Container } from 'react-bootstrap';
+import { Card } from 'web3uikit';
 
-const List = () => {
+const Items = () => {
     return (
         <>
         <Container>
             <Row>
                 <Col md="2" className="mt-1">
-                    <Link to="#CreatorPage">
+                    <Link to="#items" className="cardItems">
                         <Card
                             description="@AuthorName"
                             title="NewArt_1"
@@ -27,7 +24,7 @@ const List = () => {
                     </Link>
                 </Col>
                 <Col md="2" className="mt-1">
-                    <Link to="#CreatorPage">
+                    <Link to="#items" className="cardItems">
                         <Card
                             description="@AuthorName"
                             title="NewArt_1"
@@ -36,11 +33,13 @@ const List = () => {
                             <div>
                             <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
                             </div>
+                            <p><span className="buySpan">Покупка</span> 1ETH</p>
+                            <p><span className="rentSpan">Аренда</span> 0.8ETH</p>
                         </Card>
                     </Link>
                 </Col>
                 <Col md="2" className="mt-1">
-                    <Link to="#CreatorPage">
+                    <Link to="#items" className="cardItems">
                         <Card
                             description="@AuthorName"
                             title="NewArt_1"
@@ -49,11 +48,13 @@ const List = () => {
                             <div>
                             <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
                             </div>
+                            <p><span className="buySpan">Покупка</span> 1ETH</p>
+                            <p><span className="rentSpan">Аренда</span> 0.8ETH</p>
                         </Card>
                     </Link>
                 </Col>
                 <Col md="2" className="mt-1">
-                    <Link to="#CreatorPage">
+                    <Link to="#items" className="cardItems">
                         <Card
                             description="@AuthorName"
                             title="NewArt_1"
@@ -62,11 +63,13 @@ const List = () => {
                             <div>
                             <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
                             </div>
+                            <p><span className="buySpan">Покупка</span> 1ETH</p>
+                            <p><span className="rentSpan">Аренда</span> 0.8ETH</p>
                         </Card>
                     </Link>
                 </Col>
                 <Col md="2" className="mt-1">
-                    <Link to="#CreatorPage">
+                    <Link to="#items" className="cardItems">
                         <Card
                             description="@AuthorName"
                             title="NewArt_1"
@@ -75,11 +78,13 @@ const List = () => {
                             <div>
                             <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
                             </div>
+                            <p><span className="buySpan">Покупка</span> 1ETH</p>
+                            <p><span className="rentSpan">Аренда</span> 0.8ETH</p>
                         </Card>
                     </Link>
                 </Col>
                 <Col md="2" className="mt-1">
-                    <Link to="#CreatorPage">
+                    <Link to="#items" className="cardItems">
                         <Card
                             description="@AuthorName"
                             title="NewArt_1"
@@ -88,11 +93,13 @@ const List = () => {
                             <div>
                             <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
                             </div>
+                            <p><span className="buySpan">Покупка</span> 1ETH</p>
+                            <p><span className="rentSpan">Аренда</span> 0.8ETH</p>
                         </Card>
                     </Link>
                 </Col>
-                <Col md="2" className="mt-3">
-                    <Link to="#CreatorPage">
+                <Col md="2" className="mt-1">
+                    <Link to="#items" className="cardItems">
                         <Card
                             description="@AuthorName"
                             title="NewArt_1"
@@ -101,9 +108,42 @@ const List = () => {
                             <div>
                             <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
                             </div>
+                            <p><span className="buySpan">Покупка</span> 1ETH</p>
+                            <p><span className="rentSpan">Аренда</span> 0.8ETH</p>
                         </Card>
                     </Link>
                 </Col>
+                <Col md="2" className="mt-1">
+                    <Link to="#items" className="cardItems">
+                        <Card
+                            description="@AuthorName"
+                            title="NewArt_1"
+                            isDisabled="true"
+                        >
+                            <div>
+                            <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
+                            </div>
+                            <p><span className="buySpan">Покупка</span> 1ETH</p>
+                            <p><span className="rentSpan">Аренда</span> 0.8ETH</p>
+                        </Card>
+                    </Link>
+                </Col>
+                <Col md="2" className="mt-1">
+                    <Link to="#items" className="cardItems">
+                        <Card
+                            description="@AuthorName"
+                            title="NewArt_1"
+                            isDisabled="true"
+                        >
+                            <div>
+                            <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
+                            </div>
+                            <p><span className="buySpan">Покупка</span> 1ETH</p>
+                            <p><span className="rentSpan">Аренда</span> 0.8ETH</p>
+                        </Card>
+                    </Link>
+                </Col>
+
                 
             </Row>
         </Container>
@@ -111,4 +151,4 @@ const List = () => {
     )
 }
 
-export default List
+export default Items
