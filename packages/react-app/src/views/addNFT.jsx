@@ -49,7 +49,12 @@ export default class AddNFT extends React.Component {
         },
       ],
     };
+    this.handleChangeCollection = this.handleChangeCollection.bind(this);
+   this.handleChangeDeadline = this.handleChangeDeadline.bind(this);
    this.handleChangeName = this.handleChangeName.bind(this);
+   this.handleSubmit = this.handleSubmit.bind(this);
+   this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
+   this.handleChangeTokenAddress = this.handleChangeTokenAddress.bind(this);
    this.handleChangeTypeUser = this.handleChangeTypeUser.bind(this);
    this.handleChangeEmail = this.handleChangeEmail.bind(this);
   }
@@ -79,6 +84,16 @@ handleChangeName = event => {
  this.setState({ name: event.target.value });
 };
 
+handleChangeQuantity = event => {
+ console.log(event.target.value);
+ this.setState({ quantity: event.target.value });
+};
+
+handleChangeTokenAddress = event => {
+ console.log(event.target.value);
+ this.setState({ tokenAddress: event.target.value });
+};
+
 handleSubmit = event => {
  var bodyFormData = new FormData();
  console.log(
@@ -91,12 +106,12 @@ handleSubmit = event => {
    this.state.description,
  );
  bodyFormData.append("name", this.state.name);
- bodyFormData.append("email", this.state.email);
- bodyFormData.append("typeUser", this.state.typeUser);
+ bodyFormData.append("tokenAddress", this.state.tokenAddress);
+ bodyFormData.append("quantity", this.state.quantity);
  bodyFormData.append("address", this.props.address);
  axios({
    method: "post",
-   url: "http://localhost:4100/v1/users/createBilateralTreaty",
+   url: "http://localhost:4100/v1/users/addNFT",
    data: bodyFormData,
    headers: { "Content-Type": "multipart/form-data" },
  })
@@ -143,19 +158,19 @@ render() {
             <label>
               <input
                 style={{ display: "block", marginTop: "15px" }}
-                label="Email"
+                label="Token Address"
                 type="text"
-                value={this.state.email}
-                onChange={this.handleChangeEmail}
+                value={this.state.tokenAddress}
+                onChange={this.handleChangeTokenAddress}
               />
             </label>
             <label>
               <input
                 style={{ display: "block", marginTop: "15px" }}
-                label="Type User"
+                label="Quantity"
                 type="text"
-                value={this.state.typeUser}
-                onChange={this.handleChangeTypeUser}
+                value={this.state.quantity}
+                onChange={this.handleChangeQuantity}
               />
             </label>
             <input style={{ display: "block", marginTop: "15px" }} type="submit" value="Отправить" />
