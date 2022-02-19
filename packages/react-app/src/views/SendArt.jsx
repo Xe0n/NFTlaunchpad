@@ -124,7 +124,7 @@ render() {
 			<Container>
 				<Row>
 					<Col>
-						<h3 className="p-3">Добавьте ваши токены</h3>
+						<h3 className="p-3">Познакомимся поближе</h3>
 
 					</Col>
 				</Row>
