@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import { ethers } from "ethers";
 import { CameraOutlined, QrcodeOutlined } from "@ant-design/icons";
 import { useLookupAddress } from "eth-hooks/dapps/ens";
-import QrReader from "react-qr-reader";
+
 
 import Blockie from "./Blockie";
 
@@ -80,27 +80,7 @@ export default function AddressInput(props) {
             setScan(false);
           }}
         >
-          <QrReader
-            delay={250}
-            resolution={1200}
-            onError={e => {
-              console.log("SCAN ERROR", e);
-              setScan(false);
-            }}
-            onScan={newValue => {
-              if (newValue) {
-                console.log("SCAN VALUE", newValue);
-                let possibleNewValue = newValue;
-                if (possibleNewValue.indexOf("/") >= 0) {
-                  possibleNewValue = possibleNewValue.substr(possibleNewValue.lastIndexOf("0x"));
-                  console.log("CLEANED VALUE", possibleNewValue);
-                }
-                setScan(false);
-                updateAddress(possibleNewValue);
-              }
-            }}
-            style={{ width: "100%" }}
-          />
+      
         </div>
       ) : (
         ""
