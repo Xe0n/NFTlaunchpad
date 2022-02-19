@@ -145,36 +145,28 @@ render() {
 				</Row>
 				<Row>
 					<Col>
-          <form onSubmit={this.handleSubmit} style={{ marginTop: "10px" }}>
-            <label>
-              <input
-                style={{ display: "block", marginTop: "15px" }}
-                label="Name"
-                type="text"
-                value={this.state.name}
-                onChange={this.handleChangeName}
-              />
-            </label>
-            <label>
-              <input
-                style={{ display: "block", marginTop: "15px" }}
-                label="Token Address"
-                type="text"
-                value={this.state.tokenAddress}
-                onChange={this.handleChangeTokenAddress}
-              />
-            </label>
-            <label>
-              <input
-                style={{ display: "block", marginTop: "15px" }}
-                label="Quantity"
-                type="text"
-                value={this.state.quantity}
-                onChange={this.handleChangeQuantity}
-              />
-            </label>
-            <input style={{ display: "block", marginTop: "15px" }} type="submit" value="Отправить" />
-          </form>
+          
+          <Form className="text-start" onSubmit={this.handleSubmit}>
+    
+            	<Form.Group className="mb-3" controlId="formBasicEmail">
+								<Form.Label>Наименование</Form.Label>
+								<Form.Control type="text" label="name" placeholder="Наименование предмета" value={this.state.name} onChange={this.handleChangeName} />
+							</Form.Group>
+     
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+								<Form.Label>Адрес токена</Form.Label>
+								<Form.Control type="text" label="adress" placeholder="пример адреса NFT токена" value={this.state.tokenAddress} onChange={this.handleChangeTokenAddress} />
+							</Form.Group>
+        
+
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+								<Form.Label>Кол-во токенов</Form.Label>
+								<Form.Control type="text" label="Quantity" placeholder="цифровое значение" value={this.state.quantity} onChange={this.handleChangeQuantity} />
+							</Form.Group>
+              <Button variant="success" type="submit">
+                Submit
+              </Button>
+          </Form>
 					</Col>
 
 				</Row>
