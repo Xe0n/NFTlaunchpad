@@ -1,0 +1,10 @@
+.App {
+  text-align: center;
+  padding-left: calc(100vw - 100%);
+}
+.leqMci > div{
+  z-index: 9;
+}
+a{
+   text-decoration: unset;
+}
