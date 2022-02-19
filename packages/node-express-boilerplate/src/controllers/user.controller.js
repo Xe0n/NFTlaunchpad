@@ -4,15 +4,14 @@ const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { userService } = require('../services');
 const ethers = require('ethers');
-const {NETWORKS} = require('../../constants.js');
-const ILendingPool = require('./abis/LendingPool.json');
+//const ILendingPool = require('./abis/LendingPool.json');
 const formidable = require('formidable');
 
-const LENDING_POOL = '0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9';
+//const LENDING_POOL = '0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9';
 
 const localProvider = new ethers.providers.StaticJsonRpcProvider(  "http://localhost:8545");
 const signer = new ethers.Wallet("3931d768b2f778b2b17a8611ccc0e6ee15471badd9943bf8cb45dcfb6fbd1c5f", localProvider);
-let lendingPoolContract = new ethers.Contract(LENDING_POOL, ILendingPool.abi, signer);
+//let lendingPoolContract = new ethers.Contract(LENDING_POOL, ILendingPool.abi, signer);
 //const ipfsAPI = require('ipfs-http-client');
 //const { globSource } = require('ipfs-http-client')
 //onst ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
