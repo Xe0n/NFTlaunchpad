@@ -29,7 +29,7 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, ExampleUI, Hints, Subgraph, Reg, Creator, Broker, List, SendArt } from "./views";
+import { Home, ExampleUI, Hints, Subgraph, Reg, Creator, Broker, List, SendArt, AddNFT } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -347,7 +347,14 @@ function App(props) {
           <List />
         </Route>
         <Route path="/sendart">
-          <SendArt />
+          <SendArt
+             address={address}
+             />
+        </Route>
+        <Route path="/addnft">
+          <AddNFT
+             address={address}
+             />
         </Route>
       </Switch>
 
@@ -385,7 +392,7 @@ function App(props) {
 
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
       <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
-      
+
 
         <Row align="middle" gutter={[4, 4]}>
           <Col span={24}>

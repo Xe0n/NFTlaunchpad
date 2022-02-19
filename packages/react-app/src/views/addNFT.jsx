@@ -25,7 +25,7 @@ const OnSumbit = (event) => {
       });
   };
 
-export default class Reg extends React.Component {
+export default class AddNFT extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,8 +53,8 @@ export default class Reg extends React.Component {
    this.handleChangeDeadline = this.handleChangeDeadline.bind(this);
    this.handleChangeName = this.handleChangeName.bind(this);
    this.handleSubmit = this.handleSubmit.bind(this);
-   this.handleChangeDescription = this.handleChangeDescription.bind(this);
-   this.handleChangeReward = this.handleChangeReward.bind(this);
+   this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
+   this.handleChangeTokenAddress = this.handleChangeTokenAddress.bind(this);
    this.handleChangeTypeUser = this.handleChangeTypeUser.bind(this);
    this.handleChangeEmail = this.handleChangeEmail.bind(this);
   }
@@ -84,14 +84,14 @@ handleChangeName = event => {
  this.setState({ name: event.target.value });
 };
 
-handleChangeReward = event => {
+handleChangeQuantity = event => {
  console.log(event.target.value);
- this.setState({ reward: event.target.value });
+ this.setState({ quantity: event.target.value });
 };
 
-handleChangeDescription = event => {
+handleChangeTokenAddress = event => {
  console.log(event.target.value);
- this.setState({ description: event.target.value });
+ this.setState({ tokenAddress: event.target.value });
 };
 
 handleSubmit = event => {
@@ -106,12 +106,12 @@ handleSubmit = event => {
    this.state.description,
  );
  bodyFormData.append("name", this.state.name);
- bodyFormData.append("email", this.state.email);
- bodyFormData.append("typeUser", this.state.typeUser);
+ bodyFormData.append("tokenAddress", this.state.tokenAddress);
+ bodyFormData.append("quantity", this.state.quantity);
  bodyFormData.append("address", this.props.address);
  axios({
    method: "post",
-   url: "http://localhost:4100/v1/users/createBilateralTreaty",
+   url: "http://localhost:4100/v1/users/addNFT",
    data: bodyFormData,
    headers: { "Content-Type": "multipart/form-data" },
  })
@@ -139,7 +139,7 @@ render() {
 			<Container>
 				<Row>
 					<Col>
-						<h3 className="p-3">Загрузка новой работы</h3>
+						<h3 className="p-3">Добавьте ваши токены</h3>
 
 					</Col>
 				</Row>
@@ -158,19 +158,19 @@ render() {
             <label>
               <input
                 style={{ display: "block", marginTop: "15px" }}
-                label="Email"
+                label="Token Address"
                 type="text"
-                value={this.state.email}
-                onChange={this.handleChangeEmail}
+                value={this.state.tokenAddress}
+                onChange={this.handleChangeTokenAddress}
               />
             </label>
             <label>
               <input
                 style={{ display: "block", marginTop: "15px" }}
-                label="TypeUser"
+                label="Quantity"
                 type="text"
-                value={this.state.typeUser}
-                onChange={this.handleChangeTypeUser}
+                value={this.state.quantity}
+                onChange={this.handleChangeQuantity}
               />
             </label>
             <input style={{ display: "block", marginTop: "15px" }} type="submit" value="Отправить" />
