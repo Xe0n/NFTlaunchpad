@@ -21,6 +21,8 @@ const List = () => {
                             <div>
                             <img height="180px" max-width="100%" src="https://public.nftstatic.com/static/nft/zipped/ebe8c26025964357a6ed77bcf751e67a_zipped.png" />
                             </div>
+                            <p><span className="buySpan">Покупка</span> 1ETH</p>
+                            <p><span className="rentSpan">Аренда</span> 0.8ETH</p>
                         </Card>
                     </Link>
                 </Col>
