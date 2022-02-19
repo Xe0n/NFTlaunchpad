@@ -16,7 +16,7 @@ start backend
 
 cd packages/node-express-boilerplate
 
-yarn install
+yarn install <br>
 yarn run dev
 
 
