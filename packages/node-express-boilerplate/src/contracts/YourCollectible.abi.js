@@ -236,6 +236,11 @@ module.exports = [
         "type": "uint256"
       },
       {
+        "internalType": "string",
+        "name": "_newuri",
+        "type": "string"
+      },
+      {
         "internalType": "bytes",
         "name": "_data",
         "type": "bytes"
