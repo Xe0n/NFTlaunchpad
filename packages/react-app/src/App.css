@@ -8,3 +8,21 @@
 a{
    text-decoration: unset;
 }
+.avatar-main{
+  max-width: 100px;
+}
+.buySpan{
+  color: black;
+  font-weight: 600;
+}
+.rentSpan{
+  color: red;
+  font-weight: 900;
+}
+.cardItems div{
+  transition: .2s;
+}
+
+.cardItems:hover div{
+  transform: scale(1.02);
+}

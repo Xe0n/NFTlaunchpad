@@ -74,6 +74,9 @@ const getUsers = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['name', 'role']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await userService.queryUsers(filter, options);
+  result.results.forEach((item, i) => {
+    console.log("aaaaaaa", item.nft);
+  });
   res.send(result);
 });
 
@@ -97,7 +100,7 @@ const updateUser = catchAsync(async (req, res) => {
 });
 
 const deleteUser = catchAsync(async (req, res) => {
-  await userService.deleteUserById(req.params.userId);
+  await userService.deleteUserById(req.body.id);
   res.status(httpStatus.NO_CONTENT).send();
 });
 

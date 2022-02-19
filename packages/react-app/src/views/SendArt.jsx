@@ -25,7 +25,7 @@ const OnSumbit = (event) => {
       });
   };
 
-export default class Reg extends React.Component {
+export default class AddNFT extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -139,7 +139,7 @@ render() {
 			<Container>
 				<Row>
 					<Col>
-						<h3 className="p-3">Загрузка новой работы</h3>
+						<h3 className="p-3">Добавьте ваши токены</h3>
 
 					</Col>
 				</Row>
@@ -167,7 +167,7 @@ render() {
             <label>
               <input
                 style={{ display: "block", marginTop: "15px" }}
-                label="TypeUser"
+                label="Type User"
                 type="text"
                 value={this.state.typeUser}
                 onChange={this.handleChangeTypeUser}

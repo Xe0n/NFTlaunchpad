@@ -42,7 +42,6 @@
     "fortmatic": "^2.2.1",
     "graphiql": "^1.4.7",
     "graphql": "^15.3.0",
-    "ipfs-http-client": "^55.0.0",
     "isomorphic-fetch": "^3.0.0",
     "node-watch": "^0.7.1",
     "postcss": "^8.2.6",
@@ -76,7 +75,8 @@
     "less-plugin-npm-import": "^2.1.0",
     "prettier": "^2.0.5",
     "s3-folder-upload": "^2.3.1",
-    "surge": "^0.21.5"
+    "surge": "^0.21.5",
+    "ipfs-http-client": "^45.0.0"
   },
   "eslintConfig": {
     "extends": [
