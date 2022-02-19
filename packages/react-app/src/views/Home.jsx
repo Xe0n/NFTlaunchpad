@@ -124,42 +124,9 @@ const getFromIPFS = async hashToGet => {
     */
   return (
     <div>
-        <h3 className="m-5 text-start">Игроки предоставляющие свой шмот в аренду</h3>
+        <h3 className="m-5 text-start">Доступные к займу NFT</h3>
         <Container>
-        {/*
-          <Row>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-
-          </Row>
-          */}
-
+      
           <List
           dataSource={this.state.users}
           className="collectors__list clear-list"
