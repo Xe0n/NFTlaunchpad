@@ -32,6 +32,7 @@ import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph, Reg, Creator, Broker, List, SendArt, CreatorPage } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SingleItems from "./views/SingleItems";
 
 const { ethers } = require("ethers");
 
@@ -351,6 +352,9 @@ function App(props) {
         </Route>
         <Route path="/creatorpage">
           <CreatorPage />
+        </Route>
+        <Route path="/singleitems">
+          <SingleItems />
         </Route>
       </Switch>
 

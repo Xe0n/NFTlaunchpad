@@ -29,7 +29,32 @@ const CreatorPage = () => {
             <Row className="pt-3">
                 <hr />
                 <h3 className="text-start">Коллекция игрока</h3>
-                <Items/>
+                <Col md="2">
+                    <Items/>
+                </Col>
+                <Col md="2">
+                    <Items/>
+                </Col>
+                <Col md="2">
+                    <Items/>
+                </Col>
+                <Col md="2">
+                    <Items/>
+                </Col>
+                <Col md="2">
+                    <Items/>
+                </Col>
+                <Col md="2">
+                    <Items/>
+                </Col>
+                <Col md="2">
+                    <Items/>
+                </Col>
+                <Col md="2">
+                    <Items/>
+                </Col>
+                
+                
 
             </Row>
          </Container>

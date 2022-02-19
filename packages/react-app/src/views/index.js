@@ -8,3 +8,4 @@ export { default as Broker } from "./Broker";
 export { default as List } from "./List";
 export { default as SendArt } from "./SendArt";
 export { default as CreatorPage } from "./CreatorPage";
+export { default as SingleItems } from "./SingleItems";
