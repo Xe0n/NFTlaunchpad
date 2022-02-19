@@ -8,9 +8,9 @@
 # 🏄‍♂️ Quick Start
 start front
 
-yarn install
-yarn start
-yarn chain - запуск локальной сети
+> yarn install
+> yarn start
+> yarn chain - запуск локальной сети
 
 start backend
 
