@@ -49,7 +49,12 @@ export default class AddNFT extends React.Component {
         },
       ],
     };
+    this.handleChangeCollection = this.handleChangeCollection.bind(this);
+   this.handleChangeDeadline = this.handleChangeDeadline.bind(this);
    this.handleChangeName = this.handleChangeName.bind(this);
+   this.handleSubmit = this.handleSubmit.bind(this);
+   this.handleChangeDescription = this.handleChangeDescription.bind(this);
+   this.handleChangeReward = this.handleChangeReward.bind(this);
    this.handleChangeTypeUser = this.handleChangeTypeUser.bind(this);
    this.handleChangeEmail = this.handleChangeEmail.bind(this);
   }
@@ -77,6 +82,16 @@ handleChangeDeadline = event => {
 handleChangeName = event => {
  console.log(event.target.value);
  this.setState({ name: event.target.value });
+};
+
+handleChangeReward = event => {
+ console.log(event.target.value);
+ this.setState({ reward: event.target.value });
+};
+
+handleChangeDescription = event => {
+ console.log(event.target.value);
+ this.setState({ description: event.target.value });
 };
 
 handleSubmit = event => {

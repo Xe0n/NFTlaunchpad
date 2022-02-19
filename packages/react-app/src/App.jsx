@@ -255,7 +255,7 @@ function App(props) {
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} />
+          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} provider={localProvider} />
         </Route>
         <Route exact path="/debug">
           {/*
@@ -274,8 +274,8 @@ function App(props) {
             contractConfig={contractConfig}
           />
         </Route>
-   
-       
+
+
         <Route path="/mainnetdai">
           <Contract
             name="DAI"
@@ -327,12 +327,6 @@ function App(props) {
           <AddNFT
              address={address}
              />
-        </Route>
-        <Route path="/creatorpage">
-          <CreatorPage />
-        </Route>
-        <Route path="/singleitems">
-          <SingleItems />
         </Route>
       </Switch>
 

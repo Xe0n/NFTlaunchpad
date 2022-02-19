@@ -1,4 +1,4 @@
-import { create } from "ipfs-http-client";
+/*import { create } from "ipfs-http-client";
 import { BufferList } from "bl";
 export const ipfs = create({ host: "ipfs.infura.io", port: "5001", protocol: "https" });
 
@@ -19,3 +19,4 @@ export async function getFromIPFS(hashToGet) {
     return content;
   }
 }
+*/
