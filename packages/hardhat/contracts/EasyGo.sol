@@ -3,10 +3,9 @@
 pragma solidity >=0.8.10;
 
 
-import "https://github.com/aave/aave-v3-periphery/blob/master/contracts/misc/WETHGateway.sol";
+import "./WETHGateway.sol";
 
-
-contract YourContract {
+contract EasyGo {
 
 
     address public owner;
@@ -26,12 +25,13 @@ contract YourContract {
         uint256 endTime;
     }
 
-    mapping(address => LockedAccount) lockedAccounts;
+    mapping(address => LockedAccount) public lockedAccounts;
 
     function depositerETH() public payable {
             LockedAccount memory _lockedAccounts = LockedAccount({
                 amountETH: msg.value,
-                date: block.timestamp
+                startTime: block.timestamp,
+                endTime: block.timestamp + 60
             });
             lockedAccounts[msg.sender] = _lockedAccounts;
     }

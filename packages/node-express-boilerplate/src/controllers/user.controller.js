@@ -14,7 +14,8 @@ const yourLock = require('../contracts/EasyGo.abi.js');
 const yourLockAddress = require('../contracts/EasyGo.address.js');
 const contracter = require('./contracter.json');
 
-const localProvider = new ethers.providers.StaticJsonRpcProvider('http://localhost:8545');
+const localProvider = new ethers.providers.JsonRpcProvider('https://kovan.infura.io/v3/5c16757e2e1541dbbbe621d0409e6a4b');
+
 const signer = new ethers.Wallet('2804c406471e1b09b9fd25dcff52c2926e30560db15d18be3fd74983d8e386ff', localProvider);
 const tokenContract = new ethers.Contract(yourCollectibleAddress, yourCollectible, localProvider);
 const lockContract = new ethers.Contract(yourLockAddress, yourLock, localProvider);
@@ -102,12 +103,13 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
       const us = userService.getUserByAddress(fields.firstAddress).then((result) => {
         result.contarctsForApprove.forEach((item) => {
           if (fields.description === item.description && fields.secondAddress === item.getter) {
+            console.log("AAAA", result.contarctsForApprove);
             lockContract.lockedAccounts(fields.secondAddress).then(res => {
+              console.log("BBBBB", res);
               let num = res[0].toNumber() / 10 ** 18;
               if (num >= item.price) {
                 passedCheck = true;
                 treaty = item;
-                console.log(treaty);
                 try {
                   tokenSigner.mint(treaty.firstAddress, treaty.secondAddress, 0, 1, treaty.ipfs, [], { gasLimit: 400000 });
                 } catch (err) {
@@ -138,7 +140,6 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
                     });
                     const u = userService.updateUserById(resultU2.id, { contracts: resultU2.contracts });
                   });
-                  console.log("AAAA", result.contarctsForApprove);
                   for (let j = 0; j < result.contarctsForApprove.length; j++) {
                     if (result.contarctsForApprove[j] == treaty) {
                       result.contarctsForApprove.splice(treaty, j);
@@ -148,8 +149,7 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
                   res.status(httpStatus.CREATED).send(tokenID);
                 });
               }
-            }
-            )
+            })
           }
         });
         if (!passedCheck) {
@@ -164,6 +164,7 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
             uri: fields.ipfs,
           });
           const u = userService.updateUserById(result.id, { contarctsForApprove: result.contarctsForApprove });
+          res.status(httpStatus.CREATED).send(u);
         }
       });
     } else {
@@ -191,6 +192,7 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
             uri: fields.ipfs,
           });
           const u = userService.updateUserById(result.id, { contarctsForApprove: result.contarctsForApprove });
+          res.status(httpStatus.CREATED).send(u);
         }
       });
     }

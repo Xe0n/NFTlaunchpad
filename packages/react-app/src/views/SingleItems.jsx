@@ -8,10 +8,25 @@ import { ethers } from "ethers";
 import { Items } from "../components";
 import { withRouter } from "react-router";
 import contracter from "../contracts/contracter.json";
+import contractERC777 from "../contracts/hardhat_contracts";
 const ipfsAPI = require("ipfs-http-client");
+const { BufferList } = require("bl");
 
 const infura = { host: "ipfs.infura.io", port: "5001", protocol: "https" };
 const ipfs = ipfsAPI(infura);
+
+const getFromIPFS = async hashToGet => {
+  for await (const file of ipfs.get(hashToGet)) {
+    //console.log(file.path);
+    if (!file.content) continue;
+    const content = new BufferList();
+    for await (const chunk of file.content) {
+      content.append(chunk);
+    }
+    //console.log(content);
+    return content;
+  }
+};
 
 class SingleItems extends React.Component {
   constructor(props) {
@@ -38,6 +53,7 @@ class SingleItems extends React.Component {
       ],
       secondRole: "receiver",
       firstRole: "sender",
+      deposited: false
     };
     this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
     this.handleChangePeriod = this.handleChangePeriod.bind(this);
@@ -48,6 +64,24 @@ class SingleItems extends React.Component {
     this.handleChangeSecondAddress = this.handleChangeSecondAddress.bind(this);
     this.handleChangePrice = this.handleChangePrice.bind(this);
   }
+
+    componentDidMount() {
+      const tokenContract = new ethers.Contract(
+        this.props.match.params.tokenAddress,
+        contractERC777[31337].localhost.contracts.EasyGoTreaty.abi,
+        this.props.provider,
+      );
+      tokenContract.uri(0).then(uri => {
+        uri = uri.replace(/{(.*?)}/, 0);
+        const ipfsHash = uri.replace("https://ipfs.io/ipfs/", "");
+        const json = getFromIPFS(ipfsHash).then(jsonManifestBuffer => {
+          const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
+          console.log(jsonManifest);
+          this.setState({image: jsonManifest.image});
+          this.setState({name: jsonManifest.name});
+        });
+      });
+    }
 
   handleChangeQuantity = event => {
     console.log(event.target.value);
@@ -80,42 +114,44 @@ class SingleItems extends React.Component {
   };
 
   handleSubmit = event => {
-    var bodyFormData = new FormData();
-    console.log(this.props.match.params.tokenAddress + " " + this.state.period + " " + this.state.quantity + " " + this.state.description)
-    contracter.description = this.props.match.params.tokenAddress + " " +
-     this.state.period + " " + this.state.quantity + " " + this.state.description + " " + this.state.price;
-    let metaObj = contracter;
-    let jsonObj = JSON.stringify(metaObj);
+    console.log(this.state.deposited);
+    if (this.state.deposited) {
+      var bodyFormData = new FormData();
+      console.log(this.props.match.params.tokenAddress + " " + this.state.period + " " + this.state.quantity + " " + this.state.description)
+      contracter.description = this.props.match.params.tokenAddress + " " +
+       this.state.period + " " + this.state.quantity + " " + this.state.description + " " + this.state.price;
+      let metaObj = contracter;
+      let jsonObj = JSON.stringify(metaObj);
 
-    //let metaRecv = ipfs.add(jsonObj);
-    const file = ipfs.add(jsonObj).then(file => {
-      console.log(this.props.match.params)
-      const tokenUri = "https://ipfs.io/ipfs/" + file.cid.toString() + "/{id}.json";
-      bodyFormData.append("firstAddress", this.props.address);
-      bodyFormData.append("ipfs", tokenUri);
-      bodyFormData.append("secondAddress", this.props.match.params.userAddress);
-      bodyFormData.append("firstRole", "getter");
-      bodyFormData.append("secondRole", "sender");
-      bodyFormData.append("description", contracter.description);
-      bodyFormData.append("price", this.state.price);
-      axios({
-        method: "post",
-        url: "http://localhost:4100/v1/users/createBilateralTreaty",
-        data: bodyFormData,
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-        .then(function (response) {
-          //handle success
-          localStorage.setItem("contract", Number(response.data.hex));
-          console.log("AAAAAA", Number(response.data.hex));
+      //let metaRecv = ipfs.add(jsonObj);
+      const file = ipfs.add(jsonObj).then(file => {
+        console.log(this.props.match.params)
+        const tokenUri = "https://ipfs.io/ipfs/" + file.cid.toString() + "/{id}.json";
+        bodyFormData.append("firstAddress", this.props.address);
+        bodyFormData.append("ipfs", tokenUri);
+        bodyFormData.append("secondAddress", this.props.match.params.userAddress);
+        bodyFormData.append("firstRole", "getter");
+        bodyFormData.append("secondRole", "sender");
+        bodyFormData.append("description", contracter.description);
+        bodyFormData.append("price", this.state.price);
+        axios({
+          method: "post",
+          url: "http://localhost:4100/v1/users/createBilateralTreaty",
+          data: bodyFormData,
+          headers: { "Content-Type": "multipart/form-data" },
         })
-        .catch(function (response) {
-          //handle error
-          console.log(response);
-        });
-    });
+          .then(function (response) {
+            //handle success
+            localStorage.setItem("contract", Number(response.data.hex));
+            window.location.replace("http://localhost:3000/MyContracts");
+          })
+          .catch(function (response) {
+            //handle error
+            console.log(response);
+          });
+      });
+    }
 
-    console.log(bodyFormData);
     event.preventDefault();
 
   };
@@ -129,6 +165,7 @@ class SingleItems extends React.Component {
     let contracter =this.props.writeContracts["EasyGo"];
     contracter.depositerETH(overrides).then(res => {
       console.log("HHHH", res);
+      this.setState({deposited: true});
     })
 
     //let approveTx = this.props.tx(this.props.writeContracts["EasyGo"]["depositerETH"](valueInEther)).then(res => {
@@ -141,7 +178,7 @@ class SingleItems extends React.Component {
         <Container>
           <Row className="mt-5">
             <Col>
-              <Items />
+              <Items image={this.state.image} name={this.state.name} tokenAddress={this.props.match.params.tokenAddress}/>
             </Col>
             <Col>
               <div className="mt-4">
@@ -189,7 +226,7 @@ class SingleItems extends React.Component {
                       onChange={this.handleChangePrice}
                     />
                   </Form.Group>
-                  <Button variant="success" type="submit">
+                  <Button variant="success" type="submit" style={{backgroundColor: this.state.deposited ? "green": "red"}}>
                     Купить
                   </Button>
                 </Form>

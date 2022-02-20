@@ -96,6 +96,7 @@ export default class Home extends React.Component {
   //const purpose = useContractReader(readContracts, "YourContract", "purpose");
 
   render() {
+    let i = 0;
     return (
       <div>
         <h3 className="m-5 text-start">Ваши договоры</h3>
@@ -106,12 +107,13 @@ export default class Home extends React.Component {
             style={{ margin: "auto", textAlign: "center", alignItems: "center" }}
             renderItem={item1 => {
               const id = item1.id;
+              i++;
               return (
                 <Container>
                   <Row>
                     <Card>
                       <div className="text-start">
-                        <h2>Договор № {item1.id}</h2>
+                        <h2>Договор № {i}</h2>
                         <p><b>Условия договора</b></p>
                       </div>
                       {item1.description} <br />

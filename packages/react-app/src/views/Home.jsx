@@ -62,7 +62,7 @@ export default class Home extends React.Component {
          item.nft.forEach((item1, i) => {
            const tokenContract = new ethers.Contract(
              item1.tokenAddress,
-             contractERC777[31337].localhost.contracts.YourCollectible.abi,
+             contractERC777[31337].localhost.contracts.EasyGoTreaty.abi,
              this.props.provider,
            );
            tokenContract.uri(0).then(uri => {
