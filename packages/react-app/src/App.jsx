@@ -52,7 +52,7 @@ import SingleItems from "./views/SingleItems";
 const { ethers } = require("ethers");
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.kovan; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -72,7 +72,7 @@ const providers = [
 function App(props) {
   // specify all the chains your app is available on. Eg: ['localhost', 'mainnet', ...otherNetworks ]
   // reference './constants.js' for other networks
-  const networkOptions = [initialNetwork.name, "mainnet", "rinkeby"];
+  const networkOptions = [initialNetwork.name, "mainnet", "kovan"];
 
   const [injectedProvider, setInjectedProvider] = useState();
   const [address, setAddress] = useState();
@@ -237,21 +237,27 @@ function App(props) {
         USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
       />
       <Menu style={{ textAlign: "center", marginTop: 40 }} selectedKeys={[location.pathname]} mode="horizontal">
-        <Menu.Item key="/">
-          <Link to="/">Главная</Link>
-        </Menu.Item>
-        <Menu.Item key="/debug">
-          <Link to="/debug">Витрина</Link>
-        </Menu.Item>
-        <Menu.Item key="/hints">
-          <Link to="/hints">Условия сотрудничества</Link>
-        </Menu.Item>
-      </Menu>
+          <Menu.Item key="/">
+            <Link to="/">Главная</Link>
+          </Menu.Item>
+          <Menu.Item key="/addNFT">
+            <Link to="/addNFT">Добавить NFT</Link>
+          </Menu.Item>
+          <Menu.Item key="/MyApprovingContracts">
+            <Link to="/MyApprovingContracts">Сделки в ожидании</Link>
+          </Menu.Item>
+          <Menu.Item key="/Mycontracts">
+            <Link to="/Mycontracts">Мои договора</Link>
+          </Menu.Item>
+          <Menu.Item key="/Sendart">
+            <Link to="/Sendart">Регистрация</Link>
+          </Menu.Item>
+        </Menu>
 
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} provider={localProvider} />
+          <Home address={address} yourLocalBalance={yourLocalBalance} readContracts={readContracts} provider={localProvider} />
         </Route>
         <Route exact path="/debug">
           {/*
@@ -323,11 +329,12 @@ function App(props) {
           <AddNFT address={address} />
         </Route>
         <Route path="/singleitems/:userAddress/:tokenAddress">
-          <SingleItems address={address} />
+          <SingleItems address={address} writeContracts={writeContracts} tx={tx}
+           yourLocalBalance={yourLocalBalance} readContracts={readContracts} provider={localProvider}/>
         </Route>
         <Route exact path="/mycontracts">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <MyContracts address={address} readContracts={readContracts} provider={localProvider} />
+          <MyContracts address={address} readContracts={readContracts}  provider={localProvider} />
         </Route>
         <Route exact path="/MyApprovingContracts">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}

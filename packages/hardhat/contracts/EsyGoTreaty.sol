@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 // GET LISTED ON OPENSEA: https://testnets.opensea.io/get-listed/step-two
 
-contract YourCollectible is ERC1155 {
+contract EasyGoTreaty is ERC1155 {
   uint256 private _currentTokenID = 0;
 	mapping(uint256 => uint256) public tokenSupply;
 

@@ -43,7 +43,6 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    console.log("AAAAAAAAA")
     let categories = axios
       .get("http://localhost:4100/v1/users/users")
       .then(response => {
@@ -55,10 +54,11 @@ export default class Home extends React.Component {
             this.setState({ user: user });
           }
         });
+        console.log("BBBB", user);
         user.contracts.forEach((item1, j) => {
           const tokenContract = new ethers.Contract(
             item1.tokenAddress,
-            contractERC777[31337].localhost.contracts.YourCollectible.abi,
+            contractERC777[31337].localhost.contracts.EasyGoTreaty.abi,
             this.props.provider,
           );
           //uri = uri.replace(/{(.*?)}/, "");
@@ -85,6 +85,7 @@ export default class Home extends React.Component {
   //const purpose = useContractReader(readContracts, "YourContract", "purpose");
 
   render() {
+    let i = 0;
     return (
       <div>
         <h3 className="m-5 text-start">Ваши договоры</h3>
@@ -95,7 +96,18 @@ export default class Home extends React.Component {
             style={{ margin: "auto", textAlign: "center", alignItems: "center" }}
             renderItem={item1 => {
               const id = item1.id;
-              return <h1>{this.state.description[item1.token]}</h1>;
+              i++;
+              return <Container>
+                    <Row>
+                      <Card>
+                      <div className="text-start">
+                        <h2>Договор № {i}</h2>
+                        <p><b>Условия договора</b></p>
+                      </div>
+                      {item1.description}
+                      </Card>
+                    </Row>
+                  </Container>;
             }}
           />
         </Container>
