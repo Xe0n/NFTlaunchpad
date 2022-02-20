@@ -46,7 +46,7 @@ class SingleItems extends React.Component {
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeSecondAddress = this.handleChangeSecondAddress.bind(this);
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePrice = this.handleChangePrice.bind(this);
   }
 
   handleChangeQuantity = event => {
@@ -59,9 +59,9 @@ class SingleItems extends React.Component {
     this.setState({ secondAddress: event.target.value });
   };
 
-  handleChangeEmail = event => {
+  handleChangePrice = event => {
     console.log(event.target.value);
-    this.setState({ email: event.target.value });
+    this.setState({ price: event.target.value });
   };
 
   handleChangePeriod = event => {
@@ -82,7 +82,8 @@ class SingleItems extends React.Component {
   handleSubmit = event => {
     var bodyFormData = new FormData();
     console.log(this.props.match.params.tokenAddress + " " + this.state.period + " " + this.state.quantity + " " + this.state.description)
-    contracter.description = this.props.match.params.tokenAddress + " " + this.state.period + " " + this.state.quantity + " " + this.state.description;
+    contracter.description = this.props.match.params.tokenAddress + " " +
+     this.state.period + " " + this.state.quantity + " " + this.state.description + " " + this.state.price;
     let metaObj = contracter;
     let jsonObj = JSON.stringify(metaObj);
 
@@ -96,6 +97,7 @@ class SingleItems extends React.Component {
       bodyFormData.append("firstRole", "getter");
       bodyFormData.append("secondRole", "sender");
       bodyFormData.append("description", contracter.description);
+      bodyFormData.append("price", this.state.price);
       axios({
         method: "post",
         url: "http://localhost:4100/v1/users/createBilateralTreaty",
@@ -117,6 +119,21 @@ class SingleItems extends React.Component {
     event.preventDefault();
 
   };
+
+  deposit = () => {
+    let valueInEther = ethers.utils.parseEther("" + this.state.price);
+    console.log("BBBB", this.props.writeContracts["EasyGo"]);
+    const overrides = {
+      value: valueInEther, //sending one ether
+    }
+    let contracter =this.props.writeContracts["EasyGo"];
+    contracter.depositerETH(overrides).then(res => {
+      console.log("HHHH", res);
+    })
+
+    //let approveTx = this.props.tx(this.props.writeContracts["EasyGo"]["depositerETH"](valueInEther)).then(res => {
+    //});
+  }
 
   render() {
     return (
@@ -161,10 +178,24 @@ class SingleItems extends React.Component {
                       onChange={this.handleChangeDescription}
                     />
                   </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Цена</Form.Label>
+                    <Form.Control
+                      type="text"
+                      label="adress"
+                      placeholder="10"
+                      value={this.state.price}
+                      onChange={this.handleChangePrice}
+                    />
+                  </Form.Group>
                   <Button variant="success" type="submit">
                     Купить
                   </Button>
                 </Form>
+                <Button variant="success" onClick={this.deposit.bind(this)}>
+                  Депозит залога
+                </Button>
               </div>
             </Col>
           </Row>

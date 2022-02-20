@@ -70,6 +70,7 @@ export default class Home extends React.Component {
     var bodyFormData = new FormData();
     //let metaRecv = ipfs.add(jsonObj);
     bodyFormData.append("firstAddress", this.props.address);
+    bodyFormData.append("secondAddress", treaty.getter);
     bodyFormData.append("firstRole", "sender");
     bodyFormData.append("secondRole", "getter");
     bodyFormData.append("description", treaty.description);

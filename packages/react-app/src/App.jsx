@@ -323,11 +323,11 @@ function App(props) {
           <AddNFT address={address} />
         </Route>
         <Route path="/singleitems/:userAddress/:tokenAddress">
-          <SingleItems address={address} />
+          <SingleItems address={address} writeContracts={writeContracts} tx={tx} userProviderAndSigner={userProviderAndSigner}/>
         </Route>
         <Route exact path="/mycontracts">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <MyContracts address={address} readContracts={readContracts} provider={localProvider} />
+          <MyContracts address={address} readContracts={readContracts}  provider={localProvider} />
         </Route>
         <Route exact path="/MyApprovingContracts">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}

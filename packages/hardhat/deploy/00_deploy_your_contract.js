@@ -19,10 +19,16 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   console.log(file.cid.toString());
   const tokenUri = "https://ipfs.io/ipfs/" + file.cid.toString() + "/{id}.json";
 
-  await deploy("YourCollectible", {
+  await deploy("EasyGoTreaty", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
     args: [tokenUri],
+    log: true,
+  });
+
+  await deploy("EasyGo", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
     log: true,
   });
 
@@ -34,7 +40,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     //const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
   */
 };
-module.exports.tags = ["YourCollectible"];
+module.exports.tags = ["EasyGoTreaty", "EasyGo"];
 
 /*
 Tenderly verification

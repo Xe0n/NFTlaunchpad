@@ -43,7 +43,6 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    console.log("AAAAAAAAA")
     let categories = axios
       .get("http://localhost:4100/v1/users/users")
       .then(response => {
@@ -55,10 +54,11 @@ export default class Home extends React.Component {
             this.setState({ user: user });
           }
         });
+        console.log("BBBB", user);
         user.contracts.forEach((item1, j) => {
           const tokenContract = new ethers.Contract(
             item1.tokenAddress,
-            contractERC777[31337].localhost.contracts.YourCollectible.abi,
+            contractERC777[31337].localhost.contracts.EasyGoTreaty.abi,
             this.props.provider,
           );
           //uri = uri.replace(/{(.*?)}/, "");
