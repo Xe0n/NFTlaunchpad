@@ -37,12 +37,12 @@ contract EasyGo {
     }
 
     //передавать время в минутах
-    function getMoney(uint _timeLock) public payable {
+    function getMoney() public payable {
 
         LockedAccount memory _lockedAccounts = LockedAccount({
             amountETH: msg.value,
             startTime: block.timestamp,
-            endTime: block.timestamp + (_timeLock * 60)
+            endTime: block.timestamp + 60
         });
         lockedAccounts[msg.sender] = _lockedAccounts;
         depositETH(_lockedAccounts.amountETH);

@@ -81,7 +81,6 @@ const getUsers = catchAsync(async (req, res) => {
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await userService.queryUsers(filter, options);
   result.results.forEach((item, i) => {
-    console.log('aaaaaaa', item.contracts, item.address);
   });
   res.send(result);
 });
@@ -105,7 +104,6 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
           if (fields.description === item.description && fields.secondAddress === item.getter) {
             console.log("AAAA", result.contarctsForApprove);
             lockContract.lockedAccounts(fields.secondAddress).then(res => {
-              console.log("BBBBB", res);
               let num = res[0].toNumber() / 10 ** 18;
               if (num >= item.price) {
                 passedCheck = true;
@@ -116,6 +114,7 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
                   console.err(err);
                 }
                 const tokenID1 = tokenSigner.getCurrentTokenID().then((tokenID) => {
+                  console.log("BBBBB", tokenID);
                   const us = userService.getUserByAddress(treaty.firstAddress).then((resultU1) => {
                     resultU1.contracts.push({
                       firstAddress: treaty.firstAddress,

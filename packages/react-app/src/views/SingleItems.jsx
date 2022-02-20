@@ -158,12 +158,13 @@ class SingleItems extends React.Component {
 
   deposit = () => {
     let valueInEther = ethers.utils.parseEther("" + this.state.price);
+    let valueInEther2 = ethers.utils.parseEther("" + this.state.period);
     console.log("BBBB", this.props.writeContracts["EasyGo"]);
     const overrides = {
-      value: valueInEther, //sending one ether
-    }
+      value: valueInEther
+        }
     let contracter =this.props.writeContracts["EasyGo"];
-    contracter.depositerETH(overrides).then(res => {
+    contracter.getMoney(overrides).then(res => {
       console.log("HHHH", res);
       this.setState({deposited: true});
     })

@@ -5,7 +5,7 @@
       "chainId": "42",
       "contracts": {
         "EasyGoTreaty": {
-          "address": "0x1646d577354D513b3d540B6EB05182823B25e2bE",
+          "address": "0xa64d5eAD1e2F782DCFEC7Fc5387B6b3665aa920e",
           "abi": [
             {
               "inputs": [
@@ -403,7 +403,7 @@
           ]
         },
         "EasyGo": {
-          "address": "0xDFb8650d4fb286f68751333B23714760ae08cD77",
+          "address": "0x35E4CD8EFbFcAFF6bd2dd4e2F6569a16C5A6D10B",
           "abi": [
             {
               "inputs": [],
@@ -422,13 +422,7 @@
               "type": "function"
             },
             {
-              "inputs": [
-                {
-                  "internalType": "uint256",
-                  "name": "_timeLock",
-                  "type": "uint256"
-                }
-              ],
+              "inputs": [],
               "name": "getMoney",
               "outputs": [],
               "stateMutability": "payable",
