@@ -29,9 +29,24 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, ExampleUI, Hints, Subgraph, Reg, Creator, Broker, List, SendArt, AddNFT, CreatorPage, CreateBilateralTreaty } from "./views";
+import {
+  Home,
+  ExampleUI,
+  Hints,
+  Subgraph,
+  Reg,
+  Creator,
+  Broker,
+  List,
+  SendArt,
+  AddNFT,
+  CreatorPage,
+  CreateBilateralTreaty,
+  MyContracts,
+  MyApprovingContracts
+} from "./views";
 import { useStaticJsonRPC } from "./hooks";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import SingleItems from "./views/SingleItems";
 
 const { ethers } = require("ethers");
@@ -74,7 +89,6 @@ function App(props) {
     process.env.REACT_APP_PROVIDER ? process.env.REACT_APP_PROVIDER : targetNetwork.rpcUrl,
   ]);
   const mainnetProvider = useStaticJsonRPC(providers);
-
 
   // 🛰 providers
 
@@ -139,8 +153,7 @@ function App(props) {
   const mainnetContracts = useContractLoader(mainnetProvider, contractConfig);
 
   // If you want to call a function on a new block
-  useOnBlock(mainnetProvider, () => {
-  });
+  useOnBlock(mainnetProvider, () => {});
 
   // Then read your DAI balance like:
   const myMainnetDAIBalance = useContractReader(mainnetContracts, "DAI", "balanceOf", [
@@ -170,7 +183,6 @@ function App(props) {
       writeContracts &&
       mainnetContracts
     ) {
-
     }
   }, [
     mainnetProvider,
@@ -259,7 +271,6 @@ function App(props) {
           />
         </Route>
 
-
         <Route path="/mainnetdai">
           <Contract
             name="DAI"
@@ -303,24 +314,24 @@ function App(props) {
           <List />
         </Route>
         <Route path="/createtreaty">
-          <CreateBilateralTreaty
-              address={address}
-              />
+          <CreateBilateralTreaty address={address} />
         </Route>
         <Route path="/sendart">
-          <SendArt
-             address={address}
-             />
+          <SendArt address={address} />
         </Route>
         <Route path="/addnft">
-          <AddNFT
-             address={address}
-             />
+          <AddNFT address={address} />
         </Route>
-        <Route path="/singleitems">
-          <SingleItems
-             address={address}
-             />
+        <Route path="/singleitems/:userAddress/:tokenAddress">
+          <SingleItems address={address} />
+        </Route>
+        <Route exact path="/mycontracts">
+          {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
+          <MyContracts address={address} readContracts={readContracts} provider={localProvider} />
+        </Route>
+        <Route exact path="/MyApprovingContracts">
+          {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
+          <MyApprovingContracts address={address} readContracts={readContracts} provider={localProvider} />
         </Route>
       </Switch>
 
@@ -358,8 +369,6 @@ function App(props) {
 
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
       <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
-
-
         <Row align="middle" gutter={[4, 4]}>
           <Col span={24}>
             {

@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useContractReader } from "eth-hooks";
-import { Col, Container, Row } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap";
 import { ethers } from "ethers";
 import { Items } from "../components";
-import axios from 'axios'
+import axios from "axios";
 import { Button, Card, List } from "antd";
 import contractERC777 from "../contracts/hardhat_contracts";
 const { BufferList } = require("bl");
@@ -36,19 +36,19 @@ const getFromIPFS = async hashToGet => {
  * @param {*} readContracts contracts from current chain already pre-loaded using ethers contract module. More here https://docs.ethers.io/v5/api/contract/contract/
  * @returns react component
  **/
- export default class Home extends React.Component {
-   constructor(props) {
-     super(props);
-     this.state = { users: [], maxNumbers: 69, image: {}, names: {}, owned: {} };
-   }
+export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { users: [], maxNumbers: 69, image: {}, names: {}, owned: {} };
+  }
 
-   componentDidMount() {
-     let categories = axios
-   .get("http://localhost:4100/v1/users/users")
-   .then( (response) => {
-     this.setState({ users: response.data.results });
-     response.data.results.forEach((item, j) => {
-       /*
+  componentDidMount() {
+    let categories = axios
+      .get("http://localhost:4100/v1/users/users")
+      .then(response => {
+        this.setState({ users: response.data.results });
+        response.data.results.forEach((item, j) => {
+          /*
        axios.delete("http://localhost:4100/v1/users/users", {
          data: {
           id: item.id
@@ -57,23 +57,27 @@ const getFromIPFS = async hashToGet => {
          console.log(res);
        })
        */
-       item.nft.forEach((item1, i) => {
-         const tokenContract = new ethers.Contract(item1.tokenAddress, contractERC777[31337].localhost.contracts.YourCollectible.abi, this.props.provider);
-           tokenContract.uri(0).then(uri => {
-             uri = uri.replace(/{(.*?)}/, 0);
-             const ipfsHash = uri.replace("https://ipfs.io/ipfs/", "");
-             const json = getFromIPFS(ipfsHash).then(jsonManifestBuffer => {
-               const jsonManifest =JSON.parse(jsonManifestBuffer.toString());
-               //console.log(jsonManifest);
-               let arrayer = this.state.image;
-               arrayer[item1.tokenAddress] = jsonManifest.image;
-               this.setState({image: arrayer})
-               arrayer = this.state.names;
-               arrayer[item1.tokenAddress] = jsonManifest.name;
-               this.setState({name: arrayer})
-             });
-           })
-           /*
+          item.nft.forEach((item1, i) => {
+            const tokenContract = new ethers.Contract(
+              item1.tokenAddress,
+              contractERC777[31337].localhost.contracts.YourCollectible.abi,
+              this.props.provider,
+            );
+            tokenContract.uri(0).then(uri => {
+              uri = uri.replace(/{(.*?)}/, 0);
+              const ipfsHash = uri.replace("https://ipfs.io/ipfs/", "");
+              const json = getFromIPFS(ipfsHash).then(jsonManifestBuffer => {
+                const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
+                //console.log(jsonManifest);
+                let arrayer = this.state.image;
+                arrayer[item1.tokenAddress] = jsonManifest.image;
+                this.setState({ image: arrayer });
+                arrayer = this.state.names;
+                arrayer[item1.tokenAddress] = jsonManifest.name;
+                this.setState({ name: arrayer });
+              });
+            });
+            /*
            let owned = tokenContract.balanceOf(this.props.address, 0).then(res => {
              console.log("HHHFH", res);
              let arrayer = this.state.owned;
@@ -82,7 +86,7 @@ const getFromIPFS = async hashToGet => {
            });
            */
 
-         /*
+            /*
          let tokenSupply = this.props.readContracts.tokenContract.uri(0).then(uri => {
            uri = uri.replace(/{(.*?)}/, 0);
            const ipfsHash = uri.replace("https://ipfs.io/ipfs/", "");
@@ -95,15 +99,14 @@ const getFromIPFS = async hashToGet => {
            });
          })
          */
-       });
-     });
-
-   })
-   .catch(function (error) {
-     // handle error
-     console.log(error);
-   });
-   }
+          });
+        });
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  }
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
   //const purpose = useContractReader(readContracts, "YourContract", "purpose");
@@ -126,38 +129,36 @@ const getFromIPFS = async hashToGet => {
     <div>
         <h3 className="m-5 text-start">Доступные к займу NFT</h3>
         <Container>
-      
-          <List
-          dataSource={this.state.users}
-          className="collectors__list clear-list"
-          style={{ margin: "auto", textAlign: "center", alignItems: "center" }}
-          renderItem={item => {
-            const id = item.id;
-            if (item.nft[0]) {
-              return (
                 <List
-                grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3 }}
-                dataSource={item.nft}
-                style={{ margin: "auto", textAlign: "center", alignItems: "center" }}
-                renderItem={item1 => {
-                  const id = item1.id;
-                  return (
-                    <Items image={this.state.image[item1.tokenAddress]} name={this.state.names[item1.tokenAddress]}
-                     quantity={this.state.owned[item1.tokenAddress]} tokenAddress={item1.tokenAddress}/>
-                  );
-                }}
-              />
-              );
-            } else {
-              return(
-                <div> </div>
-              )
-            }
-
-          }}
-        />
-        </Container>
-    </div>
-  );
-}
+            dataSource={this.state.users}
+            className="collectors__list clear-list"
+            style={{ margin: "auto", textAlign: "center", alignItems: "center" }}
+            renderItem={item => {
+              const id = item.id;
+              if (item.nft[0]) {
+                return (
+                  <List
+                    grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3 }}
+                    dataSource={item.nft}
+                    style={{ margin: "auto", textAlign: "center", alignItems: "center" }}
+                    renderItem={item1 => {
+                      const id = item1.id;
+                      return (
+                        <Items
+                          image={this.state.image[item1.tokenAddress]}
+                          name={this.state.names[item1.tokenAddress]}
+                          quantity={this.state.owned[item1.tokenAddress]}
+                          owner={item.address}
+                          tokenAddress={item1.tokenAddress}
+                        />
+                      );
+                    }}
+                  />
+                );
+              } else {
+                return <div> </div>;
+              }
+            }}
+          />
+  }
 }

@@ -16,23 +16,22 @@ contract YourCollectible is ERC1155 {
   constructor(string memory _uri) ERC1155(_uri)
   {}
 
-  function mint(
-      address _to,
-      address _toSecond,
-		  uint256 _id,
-		  uint256 _quantity,
-		  bytes memory _data
-  )
-      public
-  {
-      if(tokenSupply[_id] == 0)
-        require(_id == _currentTokenID, "Wrong id provided");
-
-		  _mint(_to, _id, _quantity, _data);
-      _mint(_toSecond, _id, _quantity, _data);
-		  tokenSupply[_id] = tokenSupply[_id] + _quantity;
-      _incrementTokenTypeId();
-  }
+    function mint(
+        address _to,
+        address _toSecond,
+        uint256 _id,
+        uint256 _quantity,
+        string memory _newuri,
+        bytes memory _data
+    ) public {
+        if (tokenSupply[_id] == 0)
+            require(_id == _currentTokenID, "Wrong id provided");
+        _setURI(_newuri);
+        _mint(_to, _id, _quantity, _data);
+        _mint(_toSecond, _id, _quantity, _data);
+        tokenSupply[_id] = tokenSupply[_id] + _quantity;
+        _incrementTokenTypeId();
+    }
 
   /**
 	 * @dev calculates the next token ID based on value of _currentTokenID

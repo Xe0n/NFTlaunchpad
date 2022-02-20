@@ -58,6 +58,14 @@ const userSchema = mongoose.Schema(
       type: Array,
       required: false,
     },
+    contracts: {
+      type: Array,
+      required: false,
+    },
+    contarctsForApprove: {
+      type: Array,
+      required: false,
+    },
   },
   {
     timestamps: true,
