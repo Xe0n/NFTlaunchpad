@@ -57,49 +57,30 @@ export default class Home extends React.Component {
          console.log(res);
        })
        */
-          item.nft.forEach((item1, i) => {
-            const tokenContract = new ethers.Contract(
-              item1.tokenAddress,
-              contractERC777[31337].localhost.contracts.YourCollectible.abi,
-              this.props.provider,
-            );
-            tokenContract.uri(0).then(uri => {
-              uri = uri.replace(/{(.*?)}/, 0);
-              const ipfsHash = uri.replace("https://ipfs.io/ipfs/", "");
-              const json = getFromIPFS(ipfsHash).then(jsonManifestBuffer => {
-                const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
-                //console.log(jsonManifest);
-                let arrayer = this.state.image;
-                arrayer[item1.tokenAddress] = jsonManifest.image;
-                this.setState({ image: arrayer });
-                arrayer = this.state.names;
-                arrayer[item1.tokenAddress] = jsonManifest.name;
-                this.setState({ name: arrayer });
-              });
-            });
-            /*
-           let owned = tokenContract.balanceOf(this.props.address, 0).then(res => {
-             console.log("HHHFH", res);
-             let arrayer = this.state.owned;
-             arrayer[item1.tokenAddress] = res.toNumber();
-             this.setState({owned: arrayer})
+       console.log(item.address, this.props.address);
+       if (item.address !== this.props.address) {
+         item.nft.forEach((item1, i) => {
+           const tokenContract = new ethers.Contract(
+             item1.tokenAddress,
+             contractERC777[31337].localhost.contracts.YourCollectible.abi,
+             this.props.provider,
+           );
+           tokenContract.uri(0).then(uri => {
+             uri = uri.replace(/{(.*?)}/, 0);
+             const ipfsHash = uri.replace("https://ipfs.io/ipfs/", "");
+             const json = getFromIPFS(ipfsHash).then(jsonManifestBuffer => {
+               const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
+               //console.log(jsonManifest);
+               let arrayer = this.state.image;
+               arrayer[item1.tokenAddress] = jsonManifest.image;
+               this.setState({ image: arrayer });
+               arrayer = this.state.names;
+               arrayer[item1.tokenAddress] = jsonManifest.name;
+               this.setState({ name: arrayer });
+             });
            });
-           */
-
-            /*
-         let tokenSupply = this.props.readContracts.tokenContract.uri(0).then(uri => {
-           uri = uri.replace(/{(.*?)}/, 0);
-           const ipfsHash = uri.replace("https://ipfs.io/ipfs/", "");
-           const json = getFromIPFS(ipfsHash).then(jsonManifestBuffer => {
-             const jsonManifest =JSON.parse(jsonManifestBuffer.toString());
-             //console.log(jsonManifest);
-             let arrayer = this.state.image;
-             arrayer[i] = jsonManifest.image;
-             this.setState({image: arrayer})
-           });
-         })
-         */
-          });
+         });
+       }
         });
       })
       .catch(function (error) {
@@ -135,7 +116,7 @@ export default class Home extends React.Component {
             style={{ margin: "auto", textAlign: "center", alignItems: "center" }}
             renderItem={item => {
               const id = item.id;
-              if (item.nft[0]) {
+              if (item.nft[0] && item.address !== this.props.address) {
                 return (
                   <List
                     grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3 }}

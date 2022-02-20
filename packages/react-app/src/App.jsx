@@ -237,21 +237,27 @@ function App(props) {
         USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
       />
       <Menu style={{ textAlign: "center", marginTop: 40 }} selectedKeys={[location.pathname]} mode="horizontal">
-        <Menu.Item key="/">
-          <Link to="/">Главная</Link>
-        </Menu.Item>
-        <Menu.Item key="/debug">
-          <Link to="/debug">Витрина</Link>
-        </Menu.Item>
-        <Menu.Item key="/hints">
-          <Link to="/hints">Условия сотрудничества</Link>
-        </Menu.Item>
-      </Menu>
+          <Menu.Item key="/">
+            <Link to="/">Главная</Link>
+          </Menu.Item>
+          <Menu.Item key="/addNFT">
+            <Link to="/addNFT">Добавить NFT</Link>
+          </Menu.Item>
+          <Menu.Item key="/MyApprovingContracts">
+            <Link to="/MyApprovingContracts">Сделки в ожидании</Link>
+          </Menu.Item>
+          <Menu.Item key="/Mycontracts">
+            <Link to="/Mycontracts">Мои договора</Link>
+          </Menu.Item>
+          <Menu.Item key="/Sendart">
+            <Link to="/Sendart">Регистрация</Link>
+          </Menu.Item>
+        </Menu>
 
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} provider={localProvider} />
+          <Home address={address} yourLocalBalance={yourLocalBalance} readContracts={readContracts} provider={localProvider} />
         </Route>
         <Route exact path="/debug">
           {/*

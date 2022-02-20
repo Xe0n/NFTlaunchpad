@@ -105,6 +105,7 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
             lockContract.lockedAccounts(fields.secondAddress).then(res => {
               let num = res[0].toNumber() / 10 ** 18;
               if (num >= item.price) {
+                passedCheck = true;
                 treaty = item;
                 console.log(treaty);
                 try {
@@ -113,8 +114,8 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
                   console.err(err);
                 }
                 const tokenID1 = tokenSigner.getCurrentTokenID().then((tokenID) => {
-                  const us = userService.getUserByAddress(treaty.firstAddress).then((result) => {
-                    result.contracts.push({
+                  const us = userService.getUserByAddress(treaty.firstAddress).then((resultU1) => {
+                    resultU1.contracts.push({
                       firstAddress: treaty.firstAddress,
                       secondAddress: treaty.secondAddress,
                       role: treaty.firstRole,
@@ -123,10 +124,10 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
                       tokenAddress: yourCollectibleAddress,
                       uri: treaty.uri,
                     });
-                    const u = userService.updateUserById(result.id, { contracts: result.contracts });
+                    const u = userService.updateUserById(resultU1.id, { contracts: resultU1.contracts });
                   });
-                  const us1 = userService.getUserByAddress(treaty.secondAddress).then((result) => {
-                    result.contracts.push({
+                  const us1 = userService.getUserByAddress(treaty.secondAddress).then((resultU2) => {
+                    resultU2.contracts.push({
                       firstAddress: treaty.firstAddress,
                       secondAddress: treaty.secondAddress,
                       role: treaty.secondRole,
@@ -135,8 +136,15 @@ const createBilateralTreaty = catchAsync(async (req, res) => {
                       tokenAddress: yourCollectibleAddress,
                       uri: treaty.uri,
                     });
-                    const u = userService.updateUserById(result.id, { contracts: result.contracts });
+                    const u = userService.updateUserById(resultU2.id, { contracts: resultU2.contracts });
                   });
+                  console.log("AAAA", result.contarctsForApprove);
+                  for (let j = 0; j < result.contarctsForApprove.length; j++) {
+                    if (result.contarctsForApprove[j] == treaty) {
+                      result.contarctsForApprove.splice(treaty, j);
+                      const u = userService.updateUserById(result.id, { contarctsForApprove: resultU2.contarctsForApprove });
+                    }
+                  }
                   res.status(httpStatus.CREATED).send(tokenID);
                 });
               }

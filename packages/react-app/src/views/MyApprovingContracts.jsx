@@ -107,10 +107,18 @@ export default class Home extends React.Component {
             renderItem={item1 => {
               const id = item1.id;
               return (
-                <div>
-                  {item1.description}
-                  <button onClick={this.sumbitApprove(item1)}>Approve</button>
-                </div>
+                <Container>
+                  <Row>
+                    <Card>
+                      <div className="text-start">
+                        <h2>Договор № {item1.id}</h2>
+                        <p><b>Условия договора</b></p>
+                      </div>
+                      {item1.description} <br />
+                      <Button onClick={this.sumbitApprove.bind(this, item1)}>Approve</Button>
+                    </Card>
+                  </Row>
+                </Container>
               );
             }}
           />
