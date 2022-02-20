@@ -125,45 +125,11 @@ export default class Home extends React.Component {
       })
     }
     */
-    return (
-      <div>
-        <h3 className="m-5 text-start">Игроки предоставляющие свой шмот в аренду</h3>
+  return (
+    <div>
+        <h3 className="m-5 text-start">Доступные к займу NFT</h3>
         <Container>
-          {/*
-          <Row>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-            <Col md="2" className="mt-4">
-               <UserLink />
-            </Col>
-
-          </Row>
-          */}
-
-          <List
+                <List
             dataSource={this.state.users}
             className="collectors__list clear-list"
             style={{ margin: "auto", textAlign: "center", alignItems: "center" }}
@@ -194,8 +160,5 @@ export default class Home extends React.Component {
               }
             }}
           />
-        </Container>
-      </div>
-    );
   }
 }
