@@ -10,7 +10,7 @@
 
  yarn install <br>
  yarn start <br>
- yarn chain - запуск локальной сети <br>
+
 
 Запуск бэка
 
