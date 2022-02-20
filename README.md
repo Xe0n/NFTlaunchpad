@@ -6,18 +6,20 @@
 
 
 # 🏄‍♂️ Quick Start
-start front
+Запуск фронта
 
  yarn install <br>
  yarn start <br>
  yarn chain - запуск локальной сети <br>
 
-start backend
+Запуск бэка
 
 cd packages/node-express-boilerplate
 
 yarn install <br>
 yarn run dev
+
+yarn deploy
 
 
 
